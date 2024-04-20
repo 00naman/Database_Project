@@ -1,0 +1,54 @@
+<!-- transport_options.html (Updated) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Options</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Travel Booking System</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+    </nav>
+    <div class="container">
+        <h2>Transport Options</h2>
+        <table>
+            <tr>
+                <th>Date of Departure</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Price</th>
+                <th>Seats Remaining</th>
+                <th>Company</th>
+                <th>Mode</th>
+                <th>Action</th>
+            </tr>
+            {% for option in transport_options %}
+            <tr>
+                <td>{{ option[0] }}</td>
+                <td>{{ option[1] }}</td>
+                <td>{{ option[2] }}</td>
+                <td>{{ option[3] }}</td>
+                <td>{{ option[4] }}</td>
+                <td>{{ option[5] }}</td>
+                <td>{{ option[6] }}</td>
+                <td>
+                    <form action="/book_ticket" method="post">
+                        <input type="hidden" name="ticket_no" value="{{ loop.index }}">
+                        <input type="hidden" name="seat_no" value="1">
+                        <input type="hidden" name="tm_id" value="{{ option[7] }}">
+                        <input type="submit" value="Book" class="button">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

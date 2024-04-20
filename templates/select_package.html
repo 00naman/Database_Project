@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Package</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Travel Booking System</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/view_bookings">View Bookings</a>
+        <a href="/logout">Logout</a>
+    </nav>
+    <div class="container">
+        <h2>Select Departure and Arrival Cities</h2>
+        <form action="/transport_options" method="post">
+            <label for="departure">Departure City:</label>
+            <select id="departure" name="departure">
+                {% for city in departure_cities %}
+                <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select><br><br>
+            <label for="arrival">Arrival City:</label>
+            <select id="arrival" name="arrival">
+                {% for city in arrival_cities %}
+                <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select><br><br>
+            <input type="submit" value="Submit" class="button">
+        </form>
+    </div>
+</body>
+</html>
