@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Hotel Location</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<header>
+    <h1>Travel Booking System</h1>
+</header>
+<nav>
+    <a href="/confirm_select_package">Home</a>
+    <a href="/view_bookings">View Travel Bookings</a>
+    <a href="/view_hotel_bookings">View Hotel Bookings</a>
+    <a href="/logout">Logout</a>
+</nav>
+<body>
+    <h2>Select Hotel Location</h2>
+    <form action="/display_hotels" method="post">
+        <label for="hotel_location">Select Location:</label>
+        <select id="hotel_location" name="hotel_location">
+            {% for location in locations %}
+            <option value="{{ location }}">{{ location }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

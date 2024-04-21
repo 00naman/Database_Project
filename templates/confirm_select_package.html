@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+        <header>
+            <h1>Travel Booking System</h1>
+        </header>
+        <nav>
+            <a href="/confirm_select_package">Home</a>
+            <a href="/view_bookings">View Travel Bookings</a>
+            <a href="/view_hotel_bookings">View Hotel Bookings</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    <div class="container">
+        <h2>Menu<h2>
+        <form action="/select_package" method="get">
+            <input type="submit" value="Book Travel" class="button">
+        </form>
+        <form action="/select_hotel_location" method="get">
+            <input type="submit" value="Book Hotel" class="button">
+        </form>
+    </div>
+</body>
+</html>

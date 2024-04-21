@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Alternate row colors */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Travel Booking System</h1>
+    </header>
+    <nav>
+        <a href="/confirm_select_package">Home</a>
+        <a href="/view_bookings">View Travel Bookings</a>
+        <a href="/view_hotel_bookings">View Hotel Bookings</a>
+        <a href="/logout">Logout</a>
+    </nav>
+    <h2>Hotel Bookings</h2>
+    <table>
+        <tr>
+            <th>Booking ID</th>
+            <th>Hotel Name</th>
+            <th>Location</th>
+            <th>Check-in Date</th>
+            <th>Check-out Date</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Air Conditioning</th>
+        </tr>
+        {% for booking in hotel_bookings %}
+        <tr>
+            <td>{{ booking[0] }}</td>
+            <td>{{ booking[6] }}</td>
+            <td>{{ booking[7] }}</td>
+            <td>{{ booking[1] }}</td>
+            <td>{{ booking[2] }}</td>
+            <td>{{ booking[3] }}</td>
+            <td>{{ booking[4] }}</td>
+            <td>{{ "Yes" if booking[5] else "No" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

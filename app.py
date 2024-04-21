@@ -34,7 +34,7 @@ def login_validation():
 
         if user:
             session['user_id'] = user[0]  # Store user_id in session
-            return redirect(url_for('select_package'))
+            return redirect(url_for('confirm_select_package'))
         else:
             flash("Invalid username or password", "error")
             return redirect(url_for('login'))
@@ -140,7 +140,7 @@ def book_ticket():
             conn.close()
 
             flash(f"Ticket booked successfully! Your seat number is {available_seat_number}.", "success")
-            return redirect(url_for('select_package'))
+            return redirect(url_for('confirm_select_package'))
         except mysql.connector.Error as err:
             flash(f"Error booking ticket: {err}", "error")
             return redirect(url_for('select_package'))
@@ -172,6 +172,99 @@ def view_bookings():
             return render_template('view_bookings.html', bookings=bookings)
         except mysql.connector.Error as err:
             flash(f"Error fetching bookings: {err}", "error")
+            return redirect(url_for('select_package'))
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/confirm_select_package')
+def confirm_select_package():
+    return render_template('confirm_select_package.html')
+
+@app.route('/select_hotel_location')
+def select_hotel_location():
+    try:
+        # Fetch all available hotel locations from the database
+        conn = connect_to_database()
+        cursor = conn.cursor()
+        cursor.execute("SELECT DISTINCT location FROM hotel")
+        locations = [row[0] for row in cursor.fetchall()]
+        cursor.close()
+        conn.close()
+
+        return render_template('select_hotel_location.html', locations=locations)
+    except mysql.connector.Error as err:
+        flash(f"Error fetching hotel locations: {err}", "error")
+        return redirect(url_for('login'))
+
+@app.route('/display_hotels', methods=['POST'])
+def display_hotels():
+    selected_location = request.form['hotel_location']
+    try:
+        # Fetch hotels available at the selected location from the database
+        conn = connect_to_database()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM hotel WHERE location = %s", (selected_location,))
+        hotels = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        return render_template('display_hotels.html', hotels=hotels, location=selected_location)
+    except mysql.connector.Error as err:
+        flash(f"Error fetching hotels: {err}", "error")
+        return redirect(url_for('login'))
+
+@app.route('/book_hotel', methods=['POST'])
+def book_hotel():
+    if 'user_id' in session:
+        try:
+            # Extract data from the form submission
+            hotel_id = request.form['hotel_id']
+            user_id = session['user_id']
+            checkin_date = request.form['checkin_date']
+            checkout_date = request.form['checkout_date']
+            room_no = request.form['room_no']
+            room_type = request.form['room_type']
+            ac = True if request.form.get('ac') == 'on' else False  # Convert checkbox value to boolean
+
+            # Insert a new record into the hotel_reservation table
+            conn = connect_to_database()
+            cursor = conn.cursor()
+            cursor.execute("""INSERT INTO hotel_reservation (checkindate, checkoutdate, room_no, room_type, ac, user_id, hotel_id)
+                              VALUES (%s, %s, %s, %s, %s, %s, %s)""",
+                           (checkin_date, checkout_date, room_no, room_type, ac, user_id, hotel_id))
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            flash("Hotel booked successfully!", "success")
+            return redirect(url_for('confirm_select_package'))
+        except mysql.connector.Error as err:
+            flash(f"Error booking hotel: {err}", "error")
+            return redirect(url_for('confirm_select_package'))  # Redirect to confirm_select_package on error
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/view_hotel_bookings')
+def view_hotel_bookings():
+    if 'user_id' in session:
+        try:
+            user_id = session['user_id']
+            
+            # Fetch the user's hotel bookings from the database with additional details
+            conn = connect_to_database()
+            cursor = conn.cursor()
+            cursor.execute("""SELECT hr.booking_id, hr.checkindate, hr.checkoutdate, hr.room_no, hr.room_type, hr.ac,
+                                     h.h_name, h.location
+                              FROM hotel_reservation hr
+                              JOIN hotel h ON hr.hotel_id = h.hotel_id
+                              WHERE hr.user_id = %s""", (user_id,))
+            hotel_bookings = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            
+            return render_template('view_hotel_bookings.html', hotel_bookings=hotel_bookings)
+        except mysql.connector.Error as err:
+            flash(f"Error fetching hotel bookings: {err}", "error")
             return redirect(url_for('select_package'))
     else:
         return redirect(url_for('login'))
