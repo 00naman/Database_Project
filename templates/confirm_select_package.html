@@ -5,25 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
 <body>
-        <header>
-            <h1>Travel Booking System</h1>
-        </header>
-        <nav>
-            <a href="/confirm_select_package">Home</a>
-            <a href="/view_bookings">View Travel Bookings</a>
-            <a href="/view_hotel_bookings">View Hotel Bookings</a>
-            <a href="/logout">Logout</a>
-        </nav>
+    <header>
+        <h1>Travel Booking System</h1>
+    </header>
+    <nav>
+        <a href="/confirm_select_package">Home</a>
+        <a href="/view_bookings">View Travel Bookings</a>
+        <a href="/view_hotel_bookings">View Hotel Bookings</a>
+        <a href="/logout">Logout</a>
+    </nav>
     <div class="container">
-        <h2>Menu<h2>
+        <h2>Menu</h2>
         <form action="/select_package" method="get">
             <input type="submit" value="Book Travel" class="button">
         </form>
         <form action="/select_hotel_location" method="get">
             <input type="submit" value="Book Hotel" class="button">
+        </form>
+        <form action="/go_review" method="get">
+            <input type="submit" value="Add Review" class="button">
         </form>
     </div>
 </body>

@@ -9,7 +9,7 @@ body {
 
 .container {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto; 
 }
 
 header {
@@ -82,4 +82,17 @@ tr:hover {
 
 .error {
     color: red;
+}
+
+body {
+    background-image: url('.jpg'); /* Replace 'image.jpg' with the path to your image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    font-family: Arial, sans-serif;
+    background-color: rgb(255, 255, 255); /* White color with 80% opacity */
+}
+
+
+body, h1, h2, h3, h4, h5, h6, p, a, li, input, textarea, select {
+    font-family: "Helvetica", Arial, sans-serif;
 }

@@ -21,19 +21,27 @@
         {% for hotel in hotels %}
         <li>
             {{ hotel[1] }} - Rating: {{ hotel[3] }}
-            <form action="/book_hotel" method="post">
+            <form action="/book_hotel" method="post" style="margin-top: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 5px;">
                 <input type="hidden" name="hotel_id" value="{{ hotel[0] }}">
-                <label for="checkin_date">Check-in Date:</label>
-                <input type="date" id="checkin_date" name="checkin_date" required><br>
-                <label for="checkout_date">Check-out Date:</label>
-                <input type="date" id="checkout_date" name="checkout_date" required><br>
-                <label for="room_no">Room Number:</label>
-                <input type="number" id="room_no" name="room_no" required><br>
-                <label for="room_type">Room Type:</label>
-                <input type="text" id="room_type" name="room_type" required><br>
-                <label for="ac">Air Conditioning:</label>
-                <input type="checkbox" id="ac" name="ac"><br>
-                <input type="submit" value="Book">
+                <label for="checkin_date">Check-in Date:</label><br>
+                <input type="date" id="checkin_date" name="checkin_date" required style="padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;"><br>
+                <label for="checkout_date">Check-out Date:</label><br>
+                <input type="date" id="checkout_date" name="checkout_date" required style="padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;"><br>
+                <label for="room_type">Room Type:</label><br>
+                <input type="text" id="room_type" name="room_type" required style="padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;"><br>
+                <label for="ac">Air Conditioning:</label><br>
+                <input type="checkbox" id="ac" name="ac" style="margin-bottom: 10px;"><br>
+                <input type="submit" value="Book" style="background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin-top: 10px;
+                cursor: pointer;
+                border-radius: 5px;">
             </form>
         </li>
         {% endfor %}

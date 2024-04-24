@@ -8,6 +8,10 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Background image */ /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    
+    background-size: cover;
+    background-position: center;
 }
 
 /* Form */
@@ -51,3 +55,12 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #45a049;
 }
+body {
+    background-image: url('.jpg'); /* Replace 'image.jpg' with the path to your image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-color: rgb(255, 255, 255);  /* White color with 80% opacity */
+}
+

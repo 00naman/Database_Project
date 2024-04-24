@@ -12,7 +12,8 @@
     </header>
     <nav>
         <a href="/confirm_select_package">Home</a>
-        <a href="/view_bookings">View Bookings</a>
+        <a href="/view_bookings">View Travel Bookings</a>
+        <a href="/view_hotel_bookings">View Hotel Bookings</a>
         <a href="/logout">Logout</a>
     </nav>
     <div class="container">
@@ -30,6 +31,12 @@
                 <option value="{{ city }}">{{ city }}</option>
                 {% endfor %}
             </select><br><br>
+            <label for="t_mode">Mode:</label>
+<select id="t_mode" name="t_mode">
+    {% for mode in travel_modes %}  <!-- Corrected variable name -->
+    <option value="{{ mode }}">{{ mode }}</option>  <!-- Changed variable name here as well -->
+    {% endfor %}
+</select><br><br>
             <input type="submit" value="Submit" class="button">
         </form>
     </div>

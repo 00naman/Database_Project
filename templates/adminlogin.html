@@ -2,22 +2,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='login-style.css') }}">
+    
 </head>
-
 <body>
     <header>
         <h1>Travel Booking System</h1>
     </header>
     <div class="container">
-        <h2>Login</h2>
-        <form action="/login" method="post">
+        <h2>Admin Login</h2>
+        <form action="/admin_page" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -28,11 +27,8 @@
             </div>
             <input type="submit" value="Login" class="button">
         </form>
-        <form action="/adminlogin" method="post">
-            <input type="submit" value="Admin Login" class="button">
-        </form>
-        <form action="/register" method="post">
-            <input type="submit" value="New? Register Here" class="button">
+        <form action="/goback" method="post">
+            <input type="submit" value="Go Back" class="button">
         </form>
     </div>
 </body>
